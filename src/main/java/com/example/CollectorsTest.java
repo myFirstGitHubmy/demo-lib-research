@@ -2,6 +2,7 @@ package com.example;
 
 import com.domain.Object;
 import com.domain.User;
+import com.domain.annotation.Logger;
 import com.domain.annotation.PrintMethod;
 import com.utils.GenerateUtil;
 
@@ -10,28 +11,22 @@ import java.util.List;
 
 import static java.util.stream.Collectors.*;
 
+@Logger(CollectorsTest.class)
 public class CollectorsTest {
-    private List<User> objects;
+    private final List<User> objects;
 
     public CollectorsTest(List<User> objects) {
         this.objects = objects;
     }
 
-    public List<User> getObjects() {
-        return objects;
-    }
-
-    public void setObjects(List<User> objects) {
-        this.objects = objects;
-    }
-
+    @PrintMethod
     public void mapCollectors() {
         System.out.println("================ COLLECTORS.MAP ==================\n" +
                 "=========================================================");
     }
 
-    public void grouping(List<User> objects) {
-        GenerateUtil.print("GroupingBy");
+    @PrintMethod
+    public void grouping() {
         System.out.println(objects.stream().collect(groupingBy(User::getAllRoles, mapping(User::getLastName, toList()))));
     }
 

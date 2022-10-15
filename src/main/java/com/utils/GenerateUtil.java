@@ -74,11 +74,12 @@ public class GenerateUtil {
                 "=========================================================");
     }
 
-    public static String invoke(Object inst, Class<?> type) throws IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException, ClassNotFoundException {
+    public static String invoke(Object inst, Class<?> type){
         List<Method> methods = Reflect.on(type).methods().annotatedWith(PrintMethod.class);
         methods.forEach(m -> {
             try {
-                System.out.println("===== invoke - " + m.getName() + " =======");
+                System.out.println("=========================================" +
+                        "======= invoke - " + m.getName() + " ====================================================");
                 m.invoke(inst);
             } catch (IllegalAccessException | InvocationTargetException e) {
                 e.printStackTrace();
