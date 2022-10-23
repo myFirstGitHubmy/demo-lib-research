@@ -2,23 +2,16 @@ package com.utils;
 
 import com.domain.Role;
 import com.domain.User;
-import com.domain.annotation.PrintMethod;
-import org.pacesys.reflect.Reflect;
-import org.reflections.Reflections;
-import org.reflections.scanners.MethodAnnotationsScanner;
-import org.reflections.util.ClasspathHelper;
-import org.reflections.util.ConfigurationBuilder;
-import sun.reflect.MethodAccessor;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 public class GenerateUtil {
     private int id;
+    private static List<String> names;
+    private static List<String> surNames;
 
     public GenerateUtil() {
         id = 0;
@@ -42,15 +35,14 @@ public class GenerateUtil {
     }
 
     public static List<User> initUsers(int countUser) {
-        GenerateNameUtil generateNameUtil = new GenerateNameUtil();
         List<User> users = new ArrayList<>();
         for(int i=0; i < countUser; i++) {
-            String name = generateNameUtil.getName();
+            String name = getName();
             users.add(new User(
                             name,
-                            generateNameUtil.getSurName(),
-                            "-",
-                            "user_" + name,
+                            getSurName(),
+                            Separator.UNDERSCORE.getTitle(),
+                            String.join(User.IDENT, Separator.UNDERSCORE.getTitle(), name),
                             String.valueOf(Math.random()),
                             getRoles()
                     )
@@ -69,23 +61,65 @@ public class GenerateUtil {
         return roles;
     }
 
-    public static void print(Object object) {
-        System.err.println("================ TEST method "+ object + " ==================\n" +
-                "=========================================================");
+    public static String getName() {
+        initNames();
+        Collections.shuffle(names);
+        return names.stream().findFirst().orElse(null);
     }
 
-    public static String invoke(Object inst, Class<?> type){
-        List<Method> methods = Reflect.on(type).methods().annotatedWith(PrintMethod.class);
-        methods.forEach(m -> {
-            try {
-                System.out.println("=========================================" +
-                        "======= invoke - " + m.getName() + " ====================================================");
-                m.invoke(inst);
-            } catch (IllegalAccessException | InvocationTargetException e) {
-                e.printStackTrace();
-            }
-        });
+    public static String getSurName() {
+        initSurNames();
+        Collections.shuffle(surNames);
+        return surNames.stream().findFirst().orElse(null);
+    }
 
-        return "none";
+    private static void initNames() {
+        names = Arrays.asList(
+                "James",
+                "Robert",
+                "John",
+                "Michael",
+                "David",
+                "William",
+                "Richard",
+                "Joseph",
+                "Thomas",
+                "Charles",
+                "Mary",
+                "Patricia",
+                "Jennifer",
+                "Linda",
+                "Elizabeth",
+                "Barbara",
+                "Susan",
+                "Jessica",
+                "Sarah",
+                "Karen"
+        );
+    }
+
+    private static void initSurNames() {
+        surNames = Arrays.asList(
+                "Smith",
+                "Jones",
+                "Taylor",
+                "Williams"
+//                "Brown",
+//                "White",
+//                "Harris",
+//                "Martin",
+//                "Davies",
+//                "Wilson",
+//                "Cooper",
+//                "Evans",
+//                "King",
+//                "Turner",
+//                "Martin",
+//                "Cooper",
+//                "Hill",
+//                "Ward",
+//                "Baker",
+//                "Morris"
+        );
     }
 }

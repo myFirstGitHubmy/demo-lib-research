@@ -2,6 +2,6 @@ package com.domain.service;
 
 import com.utils.GenerateUtil;
 
-public interface Implements {
+public interface Generation {
     GenerateUtil generate= new GenerateUtil();
 }

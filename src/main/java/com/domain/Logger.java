@@ -1,7 +1,5 @@
 package com.domain;
 
-import com.utils.GenerateUtil;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,7 +12,8 @@ public class Logger {
 
     public void run() {
         for (Map.Entry<Class<?>, java.lang.Object> obj : classes.entrySet()) {
-            GenerateUtil.invoke(obj.getValue(), obj.getKey());
+            new Invoke(obj.getValue(), obj.getKey())
+                    .init();
         }
     }
 }
