@@ -1,5 +1,6 @@
 package example;
 
+
 import com.domain.User;
 import com.utils.GenerateUtil;
 import org.junit.jupiter.api.Test;

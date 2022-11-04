@@ -1,7 +1,0 @@
-FROM adoptopenjdk/openjdk11:alpine-jre
-ADD /target
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} application.jar
-EXPOSE 8080
-ENTRYPOINT ["java","-jar","/demo-lib-research-1.0-SNAPSHOT.jar"]
-C:\Users\Jony\IdeaProjects\demo-lib-research\target\demo-lib-research-1.0-SNAPSHOT.jar

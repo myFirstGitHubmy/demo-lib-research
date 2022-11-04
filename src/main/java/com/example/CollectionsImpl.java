@@ -3,14 +3,12 @@ package com.example;
 import com.annotation.PrintMethod;
 import com.domain.Object;
 import com.domain.User;
-import com.domain.dto.UserDto;
 import com.utils.CollectUtil;
 import com.utils.PrintUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class CollectionsImpl {
     private final List<User> users;

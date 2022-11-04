@@ -36,7 +36,7 @@ public class GenerateUtil {
 
     public static List<User> initUsers(int countUser) {
         List<User> users = new ArrayList<>();
-        for(int i=0; i < countUser; i++) {
+        for(int i = 0; i < countUser; i++) {
             String name = getName();
             users.add(new User(
                             name,
